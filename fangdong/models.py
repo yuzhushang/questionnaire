@@ -21,6 +21,7 @@ class Landlord(models.Model):
 
     class Meta:
         unique_together = ('listing_id', 'host_id',)
+        db_table = 'landlord'
 
 
 class Visitors(models.Model):
@@ -29,11 +30,23 @@ class Visitors(models.Model):
     gender = models.CharField(max_length=5)
     phone = models.CharField(max_length=11)
     english_level = models.CharField(max_length=10)
-    visitor_Landlord = models.ManyToManyField(Landlord)
+    # visitor_Landlord = models.ManyToManyField(Landlord)
 
     class Meta:
         unique_together = ('name', 'gender', 'phone',)
+        db_table = 'visitors'
 
 
-# class VisitRecords(models.Model):
-#     visitor_id = models.IntegerField()
+class VisitRecords(models.Model):
+    visitor_id = models.IntegerField()
+    landlord_id = models.IntegerField()
+    question1_score = models.IntegerField(default=0)
+    question2_score = models.IntegerField(default=0)
+    question3_score = models.IntegerField(default=0)
+    question4_score = models.IntegerField(default=0)
+    question5_score = models.IntegerField(default=0)
+    question6_score = models.IntegerField(default=0)
+
+    class Meta:
+        db_table = 'visitor_landlord_relation'
+

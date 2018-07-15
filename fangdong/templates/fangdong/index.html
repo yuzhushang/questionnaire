@@ -8,19 +8,41 @@
     <title>Title</title>
 </head>
 <body>
-<div class="page-container page-container-responsive">
+{% block landlords %}
+<div class="page-container">
     <div class="page-left">
         <div class="host-img">
-            <img height="225" src="{% static 'fangdong/images/5441-7989.gif' %}" width="225">
+            <img height="225" src="{% static 'fangdong/images/' %}{{landlords.listing_id}}-{{landlords.host_id}}.gif" width="225">
         </div>
-        <div class="panel host_verifications"></div>
+        <div class="panel">
+            <div class="title">已验证的信息</div>
+            <div class="content">
+                <ul class="host_verifications-list">
+                    <li class="item">
+                        <div class="text">生份证</div>
+                        <div class="icon">icon</div>
+                    </li>
+                    <li class="item">
+                        <div class="text">生份证</div>
+                        <div class="icon">icon</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="page-right">
         <div class="host_about">
-            I love life and appreciate all that has come my way.  Every day is a blessing though I never have enough hours in the day to do all I have to do or want to do. While I am not in NYC, where I left an excellent freelance graphic design career working with Conde Nast Publications lastly at Vanity Fair,  my husband and I maintain a private reserve in Costa Rica where we cherish and protect acres of primary and secondary rainforest. My favorite book  is "The Unvanquished" by William Faulkner, which I read in Costa Rica, while pregnant with my son, where we were living on our reserve in a tin shack without electricity. A total Bliss! I love my gem in Williamsburg. I am involved and have sponsored many cultural events in the neighborhood. I love to ride horses! I deliver calves, raise chickens, tilapia, dogs, cows, and a beautiful son. I fix roads, love to cook, tutor, love modern dance, abstract art,  walking over the Williamsburg Bridge to Manhattan which I do almost every day, and music of many types. Mother, wife...  go fishing? You bet.
+            {{landlords.host_about}}
         </div>
-        <div class=""></div>
+        <div class="host-grade">
+            <div class="super-host">{{landlords.superhost}}</div>
+            <div class="response_time">{{landlords.response_time}}</div>
+            <div class="response_rate">{{landlords.response_rate}}</div>
+            <div class="number_of_reviews">{{landlords.number_of_reviews}}</div>
+            <div class="review_scores_rating">{{landlords.review_scores_rating}}</div>
+        </div>
     </div>
 </div>
+{% endblock %}
 </body>
 </html>
