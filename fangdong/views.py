@@ -141,5 +141,5 @@ def visit(request):
     # result_data = data.__dict__
     # result_data['has_record'] = has_record
 
-    return HttpResponseRedirect("/?=" + phone)
+    return HttpResponseRedirect("/?phone=" + phone)
 

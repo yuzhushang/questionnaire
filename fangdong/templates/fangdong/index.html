@@ -1,3 +1,4 @@
+{% load url_cut %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
+<<<<<<< HEAD
 <script type="javascript">
 </script>
 {% block landlords %}
@@ -164,6 +166,20 @@
     </div>
     <div class="clear"></div>
 </div>
+=======
+{% if landlords.host_verifications %}
+    landlords
+    {{ landlords }}
+    {{request.GET.urlencode |phone}}
+    <ul>
+        {% for question in landlords.num_range %}
+{#            <li><a href="/fangdong/{{ question}}/">{{ question}}</a></li>#}
+            {{ question}}
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+>>>>>>> 3f5e55b2b7b1e7bf0f6dc27cb13dde5eeb25189d
 {% endif %}
 {% endblock %}
 </body>

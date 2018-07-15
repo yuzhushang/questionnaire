@@ -1,3 +1,4 @@
+{% load url_cut %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +21,7 @@
 
 </head>
 <body>
+<<<<<<< HEAD
 	<div class="container">
 		<form action="./" method="post">
 			<div class="name mb20">请输入您的手机号：</div>
@@ -28,5 +30,12 @@
 			<div class="error"></div>
 		</form>
 	</div>
+=======
+这是用户页
+{{request.GET.urlencode |phone}}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'fangdong/style.css' %}" />
+>>>>>>> 3f5e55b2b7b1e7bf0f6dc27cb13dde5eeb25189d
 </body>
 </html>
