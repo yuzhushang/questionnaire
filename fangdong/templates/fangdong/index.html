@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'fangdong/common.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'fangdong/style.css' %}" />
     <title>Title</title>
 </head>
@@ -101,12 +102,9 @@
                     <div class="question">
                         <div class="en-question pl15">A1.This person is capable of paying his/her own rent mortgage.</div>
                         <div class="zh-question pl35">该房东有能力支付他/她自己的租金。</div>
-                        {%for var i = 0 i < 100 i++ %}
-                            {{i}}
+                        {% for i in landlords.num_range %}
+                            <input type="radio" name="question1_score" value="{{i}}">{{i}}<br>
                         {% endfor %}
-                        <input type="radio" name="question1_score" value="" checked="checked"><br>
-                        <input type="radio" name="question1_score" value=""><br>
-                        {{1}}
                     </div>
                     <div class="question">
                         <div class="en-question pl15">A2.This person maintains a clean, safe, and comfortable household.</div>

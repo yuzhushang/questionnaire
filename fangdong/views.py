@@ -62,7 +62,7 @@ def index(request):
     result_data['has_record'] = count > 0
     if result_data['host_verifications']:
         result_data['host_verifications'] = json.loads(result_data['host_verifications'].replace("'", "\""))
-
+    result_data['num_range'] = range(10)
     context = {'landlords': result_data}
     return render(request, 'fangdong/index.html', context)
 
@@ -70,31 +70,61 @@ def index(request):
 # 房东和访客建立联系
 def visit(request):
     phone = request.GET.get("phone")
-    data = Visitors.objects.filter(phone=phone).first()
-    has_record = data is not None
-    # 获取房东id
-    if not has_record:
-        visitors = Visitors()
-        visitors.name = request.GET.get("name")
-        visitors.gender = request.GET.get("gender")
-        visitors.phone = phone
-        visitors.english_level = request.GET.get("english_level")
-        visitors.save()
-        data = visitors
-
     listing_id = request.GET.get("listing_id")
-    if listing_id is not None:
-        landlord = Landlord.objects.get(listing_id=listing_id)
-        visit_records = VisitRecords()
-        visit_records.visitor_id = visitors.visitor_id
-        visit_records.landlord_id = landlord.listing_id
-        visit_records.question1_score = request.GET.get("question1_score")
-        visit_records.question2_score = request.GET.get("question2_score")
-        visit_records.question3_score = request.GET.get("question3_score")
-        visit_records.question4_score = request.GET.get("question4_score")
-        visit_records.question5_score = request.GET.get("question5_score")
-        visit_records.question6_score = request.GET.get("question6_score")
-        visit_records.save()
+    if request.method == 'GET':
+        data = Visitors.objects.filter(phone=phone).first()
+        has_record = data is not None
+        # 获取房东id
+        if not has_record:
+            visitors = Visitors()
+            visitors.name = request.GET.get("name")
+            visitors.gender = request.GET.get("gender")
+            visitors.phone = phone
+            visitors.english_level = request.GET.get("english_level")
+            visitors.degree = request.GET.get("degree")
+            visitors.save()
+            data = visitors
+
+        # listing_id = request.GET.get("listing_id")
+        if listing_id is not None:
+            landlord = Landlord.objects.get(listing_id=listing_id)
+            visit_records = VisitRecords()
+            visit_records.visitor_id = data.visitor_id
+            visit_records.landlord_id = landlord.listing_id
+            visit_records.question1_score = request.GET.get("question1_score")
+            visit_records.question2_score = request.GET.get("question2_score")
+            visit_records.question3_score = request.GET.get("question3_score")
+            visit_records.question4_score = request.GET.get("question4_score")
+            visit_records.question5_score = request.GET.get("question5_score")
+            visit_records.question6_score = request.GET.get("question6_score")
+            visit_records.save()
+    elif request.method == 'POST':
+        data = Visitors.objects.filter(phone=phone).first()
+        has_record = data is not None
+        # 获取房东id
+        if not has_record:
+            visitors = Visitors()
+            visitors.name = request.POST.get("name")
+            visitors.gender = request.POST.get("gender")
+            visitors.phone = phone
+            visitors.english_level = request.POST.get("english_level")
+            visitors.degree = request.POST.get("degree")
+            visitors.save()
+            data = visitors
+
+        # listing_id = request.POST.get("listing_id")
+        if listing_id is not None:
+            landlord = Landlord.objects.get(listing_id=listing_id)
+            visit_records = VisitRecords()
+            visit_records.visitor_id = visitors.visitor_id
+            visit_records.landlord_id = landlord.listing_id
+            visit_records.question1_score = request.POST.get("question1_score")
+            visit_records.question2_score = request.POST.get("question2_score")
+            visit_records.question3_score = request.POST.get("question3_score")
+            visit_records.question4_score = request.POST.get("question4_score")
+            visit_records.question5_score = request.POST.get("question5_score")
+            visit_records.question6_score = request.POST.get("question6_score")
+            visit_records.save()
 
     result_data = data.__dict__
     result_data['has_record'] = has_record

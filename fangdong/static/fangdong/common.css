@@ -1,0 +1,97 @@
+html,body {
+    margin: 0;
+    padding: 0;
+    font-family:Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color:#fff;
+    color:#484848;
+    font-size:14px;
+    line-height:1.43;
+    -ms-text-size-adjust:100%;
+    -webkit-text-size-adjust:100%;
+    -webkit-tap-highlight-color:transparent;
+    -webkit-tap-highlight-color:transparent;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale
+}
+* {
+    box-sizing: border-box;
+}
+a {
+    background:transparent
+}
+a:focus {
+    outline:thin dotted
+}
+a:active,a:hover {
+    outline:0
+}
+.clear {
+    clear: both;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.pl15 {
+    padding-left: 15px;
+}
+.pl35 {
+    padding-left: 30px;
+}
+button {
+    box-sizing: border-box;
+    display: inline-block;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #00a0ea;
+    background: #00a0ea;
+    color: #ffffff;
+    white-space: nowrap;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 13px;
+    font-size: 14px;
+    border-radius: 3px;
+    outline: none;
+}
+button:hover {
+    cursor: pointer;
+    border-color: #23B1F2;
+    background: #23B1F2;
+    color: #ffffff;
+}
+.icon-tick-checked {
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #484848;
+    color: #484848;
+    background-color: #ffffff;
+}
+.icon-tick-checked:before, .icon-tick-checked:after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    color: #484848;
+    border: 1px solid;
+    background-color: #ffffff;
+}
+.icon-tick-checked:before {
+    width: 2px;
+    height: 0;
+    left: 25%;
+    top: 50%;
+    transform: skew(0deg,50deg);
+}
+.icon-tick-checked:after {
+    width: 4px;
+    height: 0;
+    left: 45%;
+    top: 42%;
+    transform: skew(0deg,-50deg);
+}
