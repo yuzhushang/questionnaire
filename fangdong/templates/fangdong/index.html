@@ -1,17 +1,16 @@
-{% load url_cut %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
+    {% load url_cut %}
     <link rel="stylesheet" type="text/css" href="{% static 'fangdong/common.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'fangdong/style.css' %}" />
     <script src="{% static 'fangdong/jquery.js' %}"></script>
     <title>Title</title>
 </head>
 <body>
-<<<<<<< HEAD
 <script type="javascript">
 </script>
 {% block landlords %}
@@ -128,7 +127,8 @@
                 {% for i in landlords.num_range %}
                     <input class="ml15" type="radio" name="question8_score" value="{{i}}" checked="checked">{{i}}<br>
                 {% endfor %}
-                <input style="display: none" id="phone" type="text" name="phone" placeholder="手机号" value="">
+                <input style="display: none" id="phone" type="text" name="phone" placeholder="手机号" value="{{request.GET.urlencode |phone}}">
+                <input style="display: none" id="listing_id" type="text" name="listing_id" value="{{landlords.listing_id}}">
             </div>
             {% if not landlords.has_record%}
                 <div class="personal-info">
@@ -166,20 +166,6 @@
     </div>
     <div class="clear"></div>
 </div>
-=======
-{% if landlords.host_verifications %}
-    landlords
-    {{ landlords }}
-    {{request.GET.urlencode |phone}}
-    <ul>
-        {% for question in landlords.num_range %}
-{#            <li><a href="/fangdong/{{ question}}/">{{ question}}</a></li>#}
-            {{ question}}
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
->>>>>>> 3f5e55b2b7b1e7bf0f6dc27cb13dde5eeb25189d
 {% endif %}
 {% endblock %}
 </body>
