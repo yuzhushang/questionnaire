@@ -1,3 +1,4 @@
+{% load url_cut %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,7 @@
 {% if landlords.host_verifications %}
     landlords
     {{ landlords }}
+    {{request.GET.urlencode |phone}}
     <ul>
         {% for question in landlords.num_range %}
 {#            <li><a href="/fangdong/{{ question}}/">{{ question}}</a></li>#}
