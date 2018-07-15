@@ -62,6 +62,12 @@ def index(request):
     result_data['has_record'] = count > 0
     if result_data['host_verifications']:
         result_data['host_verifications'] = json.loads(result_data['host_verifications'].replace("'", "\""))
+    num_range = []
+    for i in range(10):
+        if i == 0:
+            num_range.append((i, (i+1)*10))
+        else:
+            num_range.append(i*10+1, (i+1)*10)
     result_data['num_range'] = range(10)
     context = {'landlords': result_data}
     return render(request, 'fangdong/index.html', context)
