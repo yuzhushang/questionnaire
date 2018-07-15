@@ -88,6 +88,7 @@ def visit(request):
             visitors.phone = phone
             visitors.english_level = request.GET.get("english_level")
             visitors.degree = request.GET.get("degree")
+            visitors.age = request.GET.get("age")
             visitors.save()
             data = visitors
 
@@ -117,6 +118,7 @@ def visit(request):
             visitors.phone = phone
             visitors.english_level = request.POST.get("english_level")
             visitors.degree = request.POST.get("degree")
+            visitors.age = request.GET.get("age")
             visitors.save()
             data = visitors
 
