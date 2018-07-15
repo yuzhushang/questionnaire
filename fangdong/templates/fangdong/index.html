@@ -7,9 +7,11 @@
 <body>
 {% if landlords %}
     landlords
+    {{ landlords }}
     <ul>
         {% for question in landlords %}
-            <li><a href="/fangdong/{{ question}}/">{{ question}}</a></li>
+{#            <li><a href="/fangdong/{{ question}}/">{{ question}}</a></li>#}
+            {{ question}}
         {% endfor %}
     </ul>
 {% else %}
