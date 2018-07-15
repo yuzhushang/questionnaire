@@ -68,7 +68,7 @@ def index(request):
             num_range.append('{i}-{j}'.format(i=i, j=(i+1)*10))
         else:
             num_range.append('{i}-{j}'.format(i=i*10+1, j=(i+1)*10))
-    result_data['num_range'] = range(10)
+    result_data['num_range'] = num_range
     context = {'landlords': result_data}
     return render(request, 'fangdong/index.html', context)
 
@@ -103,6 +103,8 @@ def visit(request):
             visit_records.question4_score = request.GET.get("question4_score")
             visit_records.question5_score = request.GET.get("question5_score")
             visit_records.question6_score = request.GET.get("question6_score")
+            visit_records.question7_score = request.GET.get("question7_score")
+            visit_records.question8_score = request.GET.get("question8_score")
             visit_records.save()
     elif request.method == 'POST':
         data = Visitors.objects.filter(phone=phone).first()
@@ -130,6 +132,8 @@ def visit(request):
             visit_records.question4_score = request.POST.get("question4_score")
             visit_records.question5_score = request.POST.get("question5_score")
             visit_records.question6_score = request.POST.get("question6_score")
+            visit_records.question7_score = request.POST.get("question7_score")
+            visit_records.question8_score = request.POST.get("question8_score")
             visit_records.save()
 
     result_data = data.__dict__

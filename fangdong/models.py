@@ -42,12 +42,14 @@ class Visitors(models.Model):
 class VisitRecords(models.Model):
     visitor_id = models.IntegerField()
     landlord_id = models.IntegerField()
-    question1_score = models.IntegerField(default=0)
-    question2_score = models.IntegerField(default=0)
-    question3_score = models.IntegerField(default=0)
-    question4_score = models.IntegerField(default=0)
-    question5_score = models.IntegerField(default=0)
-    question6_score = models.IntegerField(default=0)
+    question1_score = models.CharField(max_length=10, null=True)
+    question2_score = models.CharField(max_length=10, null=True)
+    question3_score = models.CharField(max_length=10, null=True)
+    question4_score = models.CharField(max_length=10, null=True)
+    question5_score = models.CharField(max_length=10, null=True)
+    question6_score = models.CharField(max_length=10, null=True)
+    question7_score = models.CharField(max_length=10, null=True)
+    question8_score = models.CharField(max_length=10, null=True)
 
     class Meta:
         db_table = 'visitor_landlord_relation'
