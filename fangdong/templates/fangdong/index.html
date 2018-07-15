@@ -8,41 +8,167 @@
     <title>Title</title>
 </head>
 <body>
+<script type="javascript">
+    var a = 'aaaaaaaa';
+    var questions = [{
+      zh: '该房东有能力支付他/她自己的租金。',
+      en: 'This person is capable of paying his/her own rent mortgage.'
+    },{
+      zh: '该房东会为我提供一个干净，安全，舒适的居住环境。',
+      en: 'This person maintains a clean, safe, and comfortable household.'
+    },{
+      zh: '在我居住期间，该房东会尽力满足我的需求。',
+      en: 'This person will be concerned about satisfying my needs during the day.'
+    },{
+      zh: '在我居住期间如果遇到紧急情况，该房东会帮助我。',
+      en: 'This person will go out of his/her way to help me in case of an emergency during my stay.'
+    },{
+      zh: '该房东会信守约定等待我办理入住，不会爽约。',
+      en: 'This person will stick to his/her word, and be there when I arrive instead of standing me up.'
+    },{
+      zh: '该房东不会蓄意伤害，提高价格或者欺骗我。',
+      en: 'This person will not intentionally harm, overcharge, or scam me.'
+    },{
+      zh: '您是否会选择入住该房东的房源？'
+    },{
+      zh: '您选择该房东的房源的概率有多大？'
+    }];
+</script>
 {% block landlords %}
+{% if landlords %}
 <div class="page-container">
     <div class="page-left">
         <div class="host-img">
-            <img height="225" src="{% static 'fangdong/images/' %}{{landlords.listing_id}}-{{landlords.host_id}}.gif" width="225">
+            <img src="{% static 'fangdong/images/' %}{{landlords.listing_id}}-{{landlords.host_id}}.gif">
         </div>
-        <div class="panel">
-            <div class="title">已验证的信息</div>
-            <div class="content">
-                <ul class="host_verifications-list">
-                    <li class="item">
-                        <div class="text">生份证</div>
-                        <div class="icon">icon</div>
-                    </li>
-                    <li class="item">
-                        <div class="text">生份证</div>
-                        <div class="icon">icon</div>
-                    </li>
-                </ul>
+        {% if landlords.host_verifications %}
+            <div class="panel">
+                <div class="panel-header">已验证的信息</div>
+                <div class="panel-content">
+                    {% for host_verification in landlords.host_verifications %}
+                        <div class="host-verification-item">
+                            <div class="text">{{host_verification}}</div>
+                            <div class="icon-tick-checked"></div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-        </div>
+        {% endif %}
     </div>
     <div class="page-right">
         <div class="host_about">
             {{landlords.host_about}}
         </div>
-        <div class="host-grade">
-            <div class="super-host">{{landlords.superhost}}</div>
-            <div class="response_time">{{landlords.response_time}}</div>
-            <div class="response_rate">{{landlords.response_rate}}</div>
-            <div class="number_of_reviews">{{landlords.number_of_reviews}}</div>
-            <div class="review_scores_rating">{{landlords.review_scores_rating}}</div>
+        {% if landlords.host_verifications %}
+        <div class="panel">
+            <div class="panel-header">已验证的信息</div>
+            <div class="panel-content">
+                {% for host_verification in landlords.host_verifications %}
+                <div class="host-verification-item">
+                    <div class="text">{{host_verification}}</div>
+                    <div class="icon-tick-checked"></div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
+        {% endif %}
+        <div class="host-grade">
+            <span class="super-host">
+                <img src="{% static 'fangdong/images/host-super.png' %}">
+                <span>{{landlords.superhost}}</span>
+            </span>
+            <span class="response_time">
+                <img src="{% static 'fangdong/images/host-super.png' %}">
+                <span>{{landlords.response_time}}</span>
+            </span>
+            <span class="response_rate">
+                <img src="{% static 'fangdong/images/host-super.png' %}">
+                <span>{{landlords.response_rate}}</span>
+            </span>
+            <span class="number_of_reviews">
+                <img src="{% static 'fangdong/images/host-super.png' %}">
+                <span>{{landlords.number_of_reviews}}</span>
+            </span>
+            <span class="review_scores_rating">
+                <img src="{% static 'fangdong/images/host-super.png' %}">
+                <span>{{landlords.review_scores_rating}}</span>
+            </span>
+        </div>
+        <form action="/fangdong/visit" method="get">
+            <div class="user-reviews">
+                <div class="title">1.请对该host的感知可信度进行打分</div>
+                <div class="questions">
+                    <div class="question">
+                        <div class="en-question pl15">A1.This person is capable of paying his/her own rent mortgage.</div>
+                        <div class="zh-question pl35">该房东有能力支付他/她自己的租金。</div>
+                        {%for var i = 0 i < 100 i++ %}
+                            {{i}}
+                        {% endfor %}
+                        <input type="radio" name="question1_score" value="" checked="checked"><br>
+                        <input type="radio" name="question1_score" value=""><br>
+                        {{1}}
+                    </div>
+                    <div class="question">
+                        <div class="en-question pl15">A2.This person maintains a clean, safe, and comfortable household.</div>
+                        <div class="zh-question pl35">该房东会为我提供一个干净，安全，舒适的居住环境。</div>
+                    </div>
+                    <div class="question">
+                        <div class="en-question pl15">B1.This person will be concerned about satisfying my needs during the day.</div>
+                        <div class="zh-question pl35">在我居住期间，该房东会尽力满足我的需求。</div>
+                    </div>
+                    <div class="question">
+                        <div class="en-question pl15">B2.This person will go out of his/her way to help me in case of an emergency during my stay.</div>
+                        <div class="zh-question pl35">在我居住期间如果遇到紧急情况，该房东会帮助我。</div>
+                    </div>
+                    <div class="question">
+                        <div class="en-question pl15">I1.This person will stick to his/her word, and be there when I arrive instead of standing me up.</div>
+                        <div class="zh-question pl35">该房东会信守约定等待我办理入住，不会爽约。</div>
+                    </div>
+                    <div class="question">
+                        <div class="en-question pl15">I2.This person will not intentionally harm, overcharge, or scam me.</div>
+                        <div class="zh-question pl35">该房东不会蓄意伤害，提高价格或者欺骗我。</div>
+                    </div>
+                </div>
+                <div class="title">2.您是否会选择入住该房东的房源？</div>
+                <div class="en-question pl15"></div>
+                <div class="title">3.您选择该房东的房源的概率有多大？</div>
+                <div class="en-question pl15"></div>
+            </div>
+            <div class="personal-info">
+                <div class="title">Personal information</div>
+                <div class="en-question pl15">
+                    1.性别<br>
+                    <input type="radio" name="gender" value="男" checked="checked">男<br>
+                    <input type="radio" name="gender" value="女">女<br>
+                </div>
+                <div class="en-question pl15">
+                    2.年龄<br>
+                    <input type="radio" name="age" value="18以下">18以下<br>
+                    <input type="radio" name="age" value="18-29" checked="checked">18-29<br>
+                    <input type="radio" name="age" value="30-45">30-45<br>
+                    <input type="radio" name="age" value="46以上">46以上<br>
+                </div>
+                <div class="en-question pl15">
+                    3.学历<br>
+                    <input type="radio" name="degree" value="本科以下">本科以下<br>
+                    <input type="radio" name="degree" value="本科" checked="checked">本科<br>
+                    <input type="radio" name="degree" value="硕士">硕士<br>
+                    <input type="radio" name="degree" value="博士及以上">博士及以上<br>
+                </div>
+                <div class="en-question pl15">
+                    4.英文水平<br>
+                    <input type="radio" name="english_level" value="四级以下">四级以下<br>
+                    <input type="radio" name="english_level" value="四级" checked="checked">四级<br>
+                    <input type="radio" name="english_level" value="六级">六级<br>
+                    <input type="radio" name="english_level" value="六级以上">六级以上<br>
+                </div>
+            </div>
+            <button class="button" type="submit" value="提交">提交</button>
+        </form>
     </div>
+    <div class="clear"></div>
 </div>
+{% endif %}
 {% endblock %}
 </body>
 </html>

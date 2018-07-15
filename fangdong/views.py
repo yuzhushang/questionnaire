@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import json
 import os
+import csv
 
 from django.shortcuts import render
 
@@ -16,32 +17,31 @@ def init_landlord():
     file_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     file_path = os.path.join(file_dir, 'db/DSS_Revise_Data.csv')
 
-    file_object = open(file_path, 'rb')
-    # landlords = []
-    try:
-        i = 0
-        titles = []
-        for line in file_object:
-            if i == 0:
-                titles = str(line).replace("\\r\\n'", "").replace("b'", "").strip().split(",")
-                print(titles)
-            else:
-                if line is not None:
-                    row = str(line).replace("\\r\\n'", "").replace("b'", "").strip().split(",")
-                    row_data = {}
-                    for cel_num in range(len(titles)):
-                        key = str(titles[cel_num])
-                        if row[cel_num] != 'N/A':
-                            row_data[key] = row[cel_num]
-                        else:
-                            row_data[key] = None
-                    Landlord.objects.create(**row_data)
-                    # landlords.append(row_data)
-            i = i + 1
-    except Exception as e:
-        print(e)
-    finally:
-        file_object.close()
+    with open(file_path, encoding='utf-8') as csvfile:
+        try:
+            readCSV = csv.reader(csvfile, delimiter=',')
+            i = 0
+            titles = []
+            for row in readCSV:
+                if i == 0:
+                    titles = row
+                    print(titles)
+                else:
+                    if row is not None:
+                        row_data = {}
+                        for cel_num in range(len(titles)):
+                            key = str(titles[cel_num])
+                            if row[cel_num] != 'N/A':
+                                row_data[key] = row[cel_num]
+                            else:
+                                row_data[key] = None
+                        Landlord.objects.create(**row_data)
+                        # landlords.append(row_data)
+                i = i + 1
+        except Exception as e:
+            print(e)
+        finally:
+            csvfile.close()
     # print(landlords)
     # return landlords
 
@@ -60,6 +60,8 @@ def index(request):
     count = Visitors.objects.filter(phone=phone).count()
     result_data = landlord_info.__dict__
     result_data['has_record'] = count > 0
+    if result_data['host_verifications']:
+        result_data['host_verifications'] = json.loads(result_data['host_verifications'].replace("'", "\""))
 
     context = {'landlords': result_data}
     return render(request, 'fangdong/index.html', context)
