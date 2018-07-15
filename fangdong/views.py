@@ -8,7 +8,7 @@ import csv
 from django.shortcuts import render
 
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from fangdong.models import Landlord, Visitors, VisitRecords
 from django.db import connection
 
@@ -138,7 +138,8 @@ def visit(request):
             visit_records.question8_score = request.POST.get("question8_score")
             visit_records.save()
 
-    result_data = data.__dict__
-    result_data['has_record'] = has_record
-    return HttpResponse(repr(result_data))
+    # result_data = data.__dict__
+    # result_data['has_record'] = has_record
+
+    return HttpResponseRedirect("/?=" + phone)
 

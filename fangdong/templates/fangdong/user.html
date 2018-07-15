@@ -6,15 +6,26 @@
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'fangdong/common.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'fangdong/login.css' %}" />
+	<script src="{% static 'fangdong/jquery.js' %}"></script>
 	<title>Title</title>
+	<script type="text/javascript">
+    function check(form) {
+      if (form.phone.value == '') {
+        $(".container .error").html('请输入手机号')
+        form.phone.focus();
+        return false;
+      }
+    }
+	</script>
+
 </head>
 <body>
 	<div class="container">
-		<form action="./" method="get">
+		<form action="./" method="post">
 			<div class="name mb20">请输入您的手机号：</div>
 			<input class="mb40" id="phone" type="text" name="phone" placeholder="手机号">
-			<button class="login-btn" type="submit" value="提交">提交</button>
-			<div class="error">aaa</div>
+			<button class="login-btn" type="submit" value="提交" onclick="check(this.form)">提交</button>
+			<div class="error"></div>
 		</form>
 	</div>
 </body>

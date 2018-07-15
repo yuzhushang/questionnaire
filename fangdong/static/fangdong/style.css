@@ -4,6 +4,9 @@
 .ml15 {
     margin-left: 15px;
 }
+input[type=radio] {
+    margin-right: 10px;
+}
 .page-container {
     margin-left: auto;
     margin-right: auto;

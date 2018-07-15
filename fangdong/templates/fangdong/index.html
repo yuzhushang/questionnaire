@@ -6,34 +6,11 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'fangdong/common.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'fangdong/style.css' %}" />
+    <script src="{% static 'fangdong/jquery.js' %}"></script>
     <title>Title</title>
 </head>
 <body>
 <script type="javascript">
-    var a = 'aaaaaaaa';
-    var questions = [{
-      zh: '该房东有能力支付他/她自己的租金。',
-      en: 'This person is capable of paying his/her own rent mortgage.'
-    },{
-      zh: '该房东会为我提供一个干净，安全，舒适的居住环境。',
-      en: 'This person maintains a clean, safe, and comfortable household.'
-    },{
-      zh: '在我居住期间，该房东会尽力满足我的需求。',
-      en: 'This person will be concerned about satisfying my needs during the day.'
-    },{
-      zh: '在我居住期间如果遇到紧急情况，该房东会帮助我。',
-      en: 'This person will go out of his/her way to help me in case of an emergency during my stay.'
-    },{
-      zh: '该房东会信守约定等待我办理入住，不会爽约。',
-      en: 'This person will stick to his/her word, and be there when I arrive instead of standing me up.'
-    },{
-      zh: '该房东不会蓄意伤害，提高价格或者欺骗我。',
-      en: 'This person will not intentionally harm, overcharge, or scam me.'
-    },{
-      zh: '您是否会选择入住该房东的房源？'
-    },{
-      zh: '您选择该房东的房源的概率有多大？'
-    }];
 </script>
 {% block landlords %}
 {% if landlords %}
@@ -149,36 +126,39 @@
                 {% for i in landlords.num_range %}
                     <input class="ml15" type="radio" name="question8_score" value="{{i}}" checked="checked">{{i}}<br>
                 {% endfor %}
+                <input style="display: none" id="phone" type="text" name="phone" placeholder="手机号" value="">
             </div>
-            <div class="personal-info">
-                <div class="title">Personal information</div>
-                <div class="en-question pl15">
-                    1.性别<br>
-                    <input type="radio" name="gender" value="男" checked="checked">男<br>
-                    <input type="radio" name="gender" value="女">女<br>
+            {% if not landlords.has_record%}
+                <div class="personal-info">
+                    <div class="title">Personal information</div>
+                    <div class="en-question pl15">
+                        1.性别<br>
+                        <input class="ml15" type="radio" name="gender" value="男" checked="checked">男<br>
+                        <input class="ml15" type="radio" name="gender" value="女">女<br>
+                    </div>
+                    <div class="en-question pl15">
+                        2.年龄<br>
+                        <input class="ml15" type="radio" name="age" value="18以下">18以下<br>
+                        <input class="ml15" type="radio" name="age" value="18-29" checked="checked">18-29<br>
+                        <input class="ml15" type="radio" name="age" value="30-45">30-45<br>
+                        <input class="ml15" type="radio" name="age" value="46以上">46以上<br>
+                    </div>
+                    <div class="en-question pl15">
+                        3.学历<br>
+                        <input class="ml15" type="radio" name="degree" value="本科以下">本科以下<br>
+                        <input class="ml15" type="radio" name="degree" value="本科" checked="checked">本科<br>
+                        <input class="ml15" type="radio" name="degree" value="硕士">硕士<br>
+                        <input class="ml15" type="radio" name="degree" value="博士及以上">博士及以上<br>
+                    </div>
+                    <div class="en-question pl15">
+                        4.英文水平<br>
+                        <input class="ml15" type="radio" name="english_level" value="四级以下">四级以下<br>
+                        <input class="ml15" type="radio" name="english_level" value="四级" checked="checked">四级<br>
+                        <input class="ml15" type="radio" name="english_level" value="六级">六级<br>
+                        <input class="ml15" type="radio" name="english_level" value="六级以上">六级以上<br>
+                    </div>
                 </div>
-                <div class="en-question pl15">
-                    2.年龄<br>
-                    <input type="radio" name="age" value="18以下">18以下<br>
-                    <input type="radio" name="age" value="18-29" checked="checked">18-29<br>
-                    <input type="radio" name="age" value="30-45">30-45<br>
-                    <input type="radio" name="age" value="46以上">46以上<br>
-                </div>
-                <div class="en-question pl15">
-                    3.学历<br>
-                    <input type="radio" name="degree" value="本科以下">本科以下<br>
-                    <input type="radio" name="degree" value="本科" checked="checked">本科<br>
-                    <input type="radio" name="degree" value="硕士">硕士<br>
-                    <input type="radio" name="degree" value="博士及以上">博士及以上<br>
-                </div>
-                <div class="en-question pl15">
-                    4.英文水平<br>
-                    <input type="radio" name="english_level" value="四级以下">四级以下<br>
-                    <input type="radio" name="english_level" value="四级" checked="checked">四级<br>
-                    <input type="radio" name="english_level" value="六级">六级<br>
-                    <input type="radio" name="english_level" value="六级以上">六级以上<br>
-                </div>
-            </div>
+            {% endif %}
             <button class="button" type="submit" value="提交">提交</button>
         </form>
     </div>
