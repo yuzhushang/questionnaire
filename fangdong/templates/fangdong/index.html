@@ -103,34 +103,52 @@
                         <div class="en-question pl15">A1.This person is capable of paying his/her own rent mortgage.</div>
                         <div class="zh-question pl35">该房东有能力支付他/她自己的租金。</div>
                         {% for i in landlords.num_range %}
-                            <input type="radio" name="question1_score" value="{{i}}">{{i}}<br>
+                            <input class="ml30" type="radio" name="question1_score" value="{{i}}" checked="checked">{{i}}<br>
                         {% endfor %}
                     </div>
                     <div class="question">
                         <div class="en-question pl15">A2.This person maintains a clean, safe, and comfortable household.</div>
                         <div class="zh-question pl35">该房东会为我提供一个干净，安全，舒适的居住环境。</div>
+                        {% for i in landlords.num_range %}
+                        <input class="ml30" type="radio" name="question2_score" value="{{i}}" checked="checked">{{i}}<br>
+                        {% endfor %}
                     </div>
                     <div class="question">
                         <div class="en-question pl15">B1.This person will be concerned about satisfying my needs during the day.</div>
                         <div class="zh-question pl35">在我居住期间，该房东会尽力满足我的需求。</div>
+                        {% for i in landlords.num_range %}
+                        <input class="ml30" type="radio" name="question3_score" value="{{i}}" checked="checked">{{i}}<br>
+                        {% endfor %}
                     </div>
                     <div class="question">
                         <div class="en-question pl15">B2.This person will go out of his/her way to help me in case of an emergency during my stay.</div>
                         <div class="zh-question pl35">在我居住期间如果遇到紧急情况，该房东会帮助我。</div>
+                        {% for i in landlords.num_range %}
+                        <input class="ml30" type="radio" name="question4_score" value="{{i}}" checked="checked">{{i}}<br>
+                        {% endfor %}
                     </div>
                     <div class="question">
                         <div class="en-question pl15">I1.This person will stick to his/her word, and be there when I arrive instead of standing me up.</div>
                         <div class="zh-question pl35">该房东会信守约定等待我办理入住，不会爽约。</div>
+                        {% for i in landlords.num_range %}
+                        <input class="ml30" type="radio" name="question5_score" value="{{i}}" checked="checked">{{i}}<br>
+                        {% endfor %}
                     </div>
                     <div class="question">
                         <div class="en-question pl15">I2.This person will not intentionally harm, overcharge, or scam me.</div>
                         <div class="zh-question pl35">该房东不会蓄意伤害，提高价格或者欺骗我。</div>
+                        {% for i in landlords.num_range %}
+                        <input class="ml30" type="radio" name="question6_score" value="{{i}}" checked="checked">{{i}}<br>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="title">2.您是否会选择入住该房东的房源？</div>
-                <div class="en-question pl15"></div>
+                <input class="ml15" type="radio" name="question7_score" value="是" checked="checked">是<br>
+                <input class="ml15" type="radio" name="question7_score" value="否">否<br>
                 <div class="title">3.您选择该房东的房源的概率有多大？</div>
-                <div class="en-question pl15"></div>
+                {% for i in landlords.num_range %}
+                    <input class="ml15" type="radio" name="question8_score" value="{{i}}" checked="checked">{{i}}<br>
+                {% endfor %}
             </div>
             <div class="personal-info">
                 <div class="title">Personal information</div>
