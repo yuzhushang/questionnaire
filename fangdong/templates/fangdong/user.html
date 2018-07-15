@@ -5,7 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-{{% landlords %}
+{% with len=100  i=0 %}
+    {% for i in len %}
+        {{i}}
+        {% set i+=10 %}
+    {% endfor %}
+{% endwith %}
+
+
 {% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'fangdong/style.css' %}" />

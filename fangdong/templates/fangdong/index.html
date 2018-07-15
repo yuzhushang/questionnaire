@@ -5,11 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-{% if landlords %}
+{% if landlords.host_verifications %}
     landlords
     {{ landlords }}
     <ul>
-        {% for question in landlords %}
+        {% for question in landlords.num_range %}
 {#            <li><a href="/fangdong/{{ question}}/">{{ question}}</a></li>#}
             {{ question}}
         {% endfor %}

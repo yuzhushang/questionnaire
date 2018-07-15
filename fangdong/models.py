@@ -26,10 +26,12 @@ class Landlord(models.Model):
 
 class Visitors(models.Model):
     visitor_id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=10)
-    gender = models.CharField(max_length=5)
-    phone = models.CharField(max_length=11)
-    english_level = models.CharField(max_length=10)
+    name = models.CharField(max_length=10, null=True)
+    gender = models.CharField(max_length=5, null=True)
+    phone = models.CharField(max_length=11, null=True)
+    english_level = models.CharField(max_length=10, null=True)
+    degree = models.CharField(max_length=10, null=True)
+    age = models.CharField(max_length=10, null=True)
     # visitor_Landlord = models.ManyToManyField(Landlord)
 
     class Meta:
