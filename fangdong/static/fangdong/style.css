@@ -7,6 +7,24 @@
 input[type=radio] {
     margin-right: 10px;
 }
+.icon-review {
+    border-radius: 6px !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+    display: inline-block !important;
+    padding: 6px 9px !important;
+    min-width: 28px !important;
+    position: relative !important;
+    overflow: hidden !important;
+    vertical-align: middle !important;
+    background: -webkit-linear-gradient(140deg, #ffc333 55%, #FFB400 55%, #FFB400 100%) !important;
+    background: -moz-linear-gradient(140deg, #ffc333 55%, #FFB400 55%, #FFB400 100%) !important;
+    background: linear-gradient(140deg, #ffc333 55%, #FFB400 55%, #FFB400 100%) !important;
+    line-height: 1.1 !important;
+    text-rendering: optimizelegibility !important;
+    text-align: center !important;
+}
 .page-container {
     margin-left: auto;
     margin-right: auto;
@@ -14,6 +32,7 @@ input[type=radio] {
     padding-right: 12px;
     padding-top: 12px;
     padding-bottom: 12px;
+    color: #75787d;
 }
 .page-container .page-left >div {
     margin-bottom: 24px;
@@ -27,7 +46,6 @@ input[type=radio] {
     -webkit-border-radius:0;
     -moz-border-radius:0;
     border-radius:0;
-    color:#484848;
     font-size:16px;
 }
 .page-container .panel-header {
@@ -48,14 +66,24 @@ input[type=radio] {
     width: 100%;
     height: 230px;
 }
-.page-container .host-grade .name {
-    font-size: 16px;
+.page-container .host-grade span {
+    font-size: 13px;
     vertical-align: top;
-    margin-top: 10px;
     display: inline-block;
+    height: 18px;
+    line-height: 18px;
+    color: #bcbec2;
+}
+.page-container .host-grade span.icon {
+    font-weight: 700;
+    position: relative;
+    bottom: 3px;
 }
 .page-container form >div {
     margin-bottom: 20px;
+}
+.page-container form .title {
+    margin-bottom: 10px;
 }
 .host-verification-item >div {
     display: inline-block;

@@ -9,22 +9,33 @@
 	<script src="{% static 'fangdong/jquery.js' %}"></script>
 	<title>Title</title>
 	<script type="text/javascript">
-    function check(form) {
-      if (form.phone.value == '') {
+    function check() {
+      var phone = $("#phone").val();
+      if (!phone) {
         $(".container .error").html('请输入手机号')
-        form.phone.focus();
+        $("#phone").focus();
         return false;
       }
+      if (!/^1{1}[0-9]{2}[0-9]{8}$/.test(phone)) {
+        $(".container .error").html('手机号格式错误，请重新输入');
+        $("#phone").focus();
+        return false;
+			}
+      return true;
+    }
+    function change() {
+      $(".container .error").html('');
+      $("#phone").focus();
     }
 	</script>
 
 </head>
 <body>
 	<div class="container">
-		<form action="./" method="get">
+		<form action="./" method="get" onsubmit="return check();">
 			<div class="name mb20">请输入您的手机号：</div>
-			<input class="mb40" id="phone" type="text" name="phone" placeholder="手机号">
-			<button class="login-btn" type="submit" value="提交" onclick="check(this.form)">提交</button>
+			<input oninput="change();" class="mb40" id="phone" type="text" name="phone" placeholder="手机号">
+			<button class="login-btn" type="submit" value="提交">提交</button>
 			<div class="error"></div>
 		</form>
 	</div>

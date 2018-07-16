@@ -3,7 +3,7 @@ html,body {
     padding: 0;
     font-family:Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color:#fff;
-    color:#484848;
+    color:#75787d;
     font-size:14px;
     line-height:1.43;
     -ms-text-size-adjust:100%;
@@ -69,15 +69,13 @@ button:hover {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 1px solid #484848;
-    color: #484848;
+    border: 1px solid #75787d;
     background-color: #ffffff;
 }
 .icon-tick-checked:before, .icon-tick-checked:after {
     content: '';
     pointer-events: none;
     position: absolute;
-    color: #484848;
     border: 1px solid;
     background-color: #ffffff;
 }
