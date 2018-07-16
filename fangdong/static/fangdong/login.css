@@ -43,7 +43,7 @@ input:-ms-input-placeholder, input::-moz-placeholder, input::-webkit-input-place
     margin-top: 20px;
     height: 40px;
     line-height: 40px;
-    color: red;
+    color: #f53d05;
 }
 @media (min-width: 768px) {
     .container form {
