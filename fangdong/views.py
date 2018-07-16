@@ -90,8 +90,9 @@ def visit(request):
             visitors.degree = request.GET.get("degree")
             visitors.age = request.GET.get("age")
             visitors.save()
-            data = visitors
+            data = Visitors.objects.filter(phone=phone).first()
 
+        print(data.__dict__)
         # listing_id = request.GET.get("listing_id")
         if listing_id is not None:
             landlord = Landlord.objects.get(listing_id=listing_id)
