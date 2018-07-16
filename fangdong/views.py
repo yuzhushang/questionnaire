@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import json
 import os
 import csv
+import traceback
 
 from django.shortcuts import render
 
@@ -31,15 +32,16 @@ def init_landlord():
                         row_data = {}
                         for cel_num in range(len(titles)):
                             key = str(titles[cel_num])
-                            if row[cel_num] != 'N/A':
+                            if row[cel_num] != 'N/A' and row[cel_num] != '':
                                 row_data[key] = row[cel_num]
                             else:
                                 row_data[key] = None
+                        print(row_data)
                         Landlord.objects.create(**row_data)
-                        # landlords.append(row_data)
                 i = i + 1
-        except Exception as e:
-            print(e)
+                print(i)
+        except:
+            traceback.print_exc()
         finally:
             csvfile.close()
     # print(landlords)
@@ -91,7 +93,7 @@ def visit(request):
             visitors.degree = request.GET.get("degree")
             visitors.age = request.GET.get("age")
             visitors.save()
-            data = visitors
+            data = Visitors.objects.filter(phone=phone).first()
 
         # listing_id = request.GET.get("listing_id")
         if listing_id is not None:
