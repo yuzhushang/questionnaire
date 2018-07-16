@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import json
 import os
 import csv
+import traceback
 
 from django.shortcuts import render
 
@@ -31,15 +32,16 @@ def init_landlord():
                         row_data = {}
                         for cel_num in range(len(titles)):
                             key = str(titles[cel_num])
-                            if row[cel_num] != 'N/A':
+                            if row[cel_num] != 'N/A' and row[cel_num] != '':
                                 row_data[key] = row[cel_num]
                             else:
                                 row_data[key] = None
+                        print(row_data)
                         Landlord.objects.create(**row_data)
-                        # landlords.append(row_data)
                 i = i + 1
-        except Exception as e:
-            print(e)
+                print(i)
+        except:
+            traceback.print_exc()
         finally:
             csvfile.close()
     # print(landlords)
@@ -54,7 +56,8 @@ def index(request):
         init_landlord()
 
     cur = connection.cursor()
-    cur.execute("SELECT count(vl.visitor_id) AS eu, l.listing_id FROM landlord l LEFT JOIN visitor_landlord_relation vl ON l.listing_id=vl.landlord_id LEFT JOIN visitors v ON v.visitor_id=vl.visitor_id AND v.phone !=%s group by l.listing_id ORDER BY eu ASC LIMIT 1", (phone,))
+    # cur.execute("SELECT count(vl.visitor_id) AS eu, l.listing_id FROM landlord l LEFT JOIN visitor_landlord_relation vl ON l.listing_id=vl.landlord_id LEFT JOIN visitors v ON v.visitor_id=vl.visitor_id AND v.phone !=%s group by l.listing_id ORDER BY eu ASC LIMIT 1", (phone,))
+    cur.execute("SELECT CASE WHEN 6-count(vl.visitor_id) >0 THEN 6-count(vl.visitor_id) ELSE 7 END AS eu, l.listing_id FROM landlord l LEFT JOIN visitor_landlord_relation vl ON l.listing_id=vl.landlord_id WHERE l.listing_id NOT IN (SELECT DISTINCT landlord_id FROM visitor_landlord_relation vl JOIN visitors v ON v.visitor_id=vl.visitor_id WHERE v.phone =%s) GROUP BY l.listing_id ORDER BY eu ASC LIMIT 20", (phone,))
     landlord_id = cur.fetchone()[1]
     landlord_info = Landlord.objects.get(listing_id=landlord_id)
     count = Visitors.objects.filter(phone=phone).count()
@@ -90,7 +93,7 @@ def visit(request):
             visitors.degree = request.GET.get("degree")
             visitors.age = request.GET.get("age")
             visitors.save()
-            data = visitors
+            data = Visitors.objects.filter(phone=phone).first()
 
         # listing_id = request.GET.get("listing_id")
         if listing_id is not None:
