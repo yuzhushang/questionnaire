@@ -52,25 +52,27 @@
         </div>
         {% endif %}
         <div class="host-grade">
-            <span class="super-host">
-                <img src="{% static 'fangdong/images/host-super.png' %}">
-                <span>{{landlords.superhost}}</span>
-            </span>
+            {% if landlords.superhost %}
+                <span class="super-host">
+                    <img src="{% static 'fangdong/images/host-super.png' %}">
+                    <span class="name">超赞房东</span>
+                </span>
+            {% endif %}
             <span class="response_time">
                 <img src="{% static 'fangdong/images/host-super.png' %}">
-                <span>{{landlords.response_time}}</span>
+                <span class="name">{{landlords.response_time}}</span>
             </span>
             <span class="response_rate">
                 <img src="{% static 'fangdong/images/host-super.png' %}">
-                <span>{{landlords.response_rate}}</span>
+                <span class="name">{{landlords.response_rate}}</span>
             </span>
             <span class="number_of_reviews">
                 <img src="{% static 'fangdong/images/host-super.png' %}">
-                <span>{{landlords.number_of_reviews}}</span>
+                <span class="name">{{landlords.number_of_reviews}}</span>
             </span>
             <span class="review_scores_rating">
                 <img src="{% static 'fangdong/images/host-super.png' %}">
-                <span>{{landlords.review_scores_rating}}</span>
+                <span class="name">{{landlords.review_scores_rating}}</span>
             </span>
         </div>
         <form action="/fangdong/visit" method="get">
