@@ -22,6 +22,7 @@ from questionnaire import settings
 
 urlpatterns = [
     path('', include('fangdong.urls')),
+    path('logout', include('fangdong.urls')),
     path('fangdong/', include('fangdong.urls')),
     url(r'^admin/', admin.site.urls),
 ]
