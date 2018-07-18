@@ -58,7 +58,10 @@ def index(request):
     cur = connection.cursor()
     # cur.execute("SELECT count(vl.visitor_id) AS eu, l.listing_id FROM landlord l LEFT JOIN visitor_landlord_relation vl ON l.listing_id=vl.landlord_id LEFT JOIN visitors v ON v.visitor_id=vl.visitor_id AND v.phone !=%s group by l.listing_id ORDER BY eu ASC LIMIT 1", (phone,))
     cur.execute("SELECT CASE WHEN 6-count(vl.visitor_id) >0 THEN 6-count(vl.visitor_id) ELSE 7 END AS eu, l.listing_id FROM landlord l LEFT JOIN visitor_landlord_relation vl ON l.listing_id=vl.landlord_id WHERE l.listing_id NOT IN (SELECT DISTINCT landlord_id FROM visitor_landlord_relation vl JOIN visitors v ON v.visitor_id=vl.visitor_id WHERE v.phone =%s) GROUP BY l.listing_id ORDER BY eu ASC LIMIT 1", (phone,))
-    landlord_id = cur.fetchone()[1]
+    landlord_tuple = cur.fetchone()
+    if landlord_tuple is None:
+        return render(request, 'fangdong/index.html', {})
+    landlord_id = landlord_tuple[1]
     landlord_info = Landlord.objects.get(listing_id=landlord_id)
     count = Visitors.objects.filter(phone=phone).count()
     result_data = landlord_info.__dict__
