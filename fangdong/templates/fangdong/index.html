@@ -11,8 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<script type="javascript">
-</script>
 {% block landlords %}
 {% if landlords %}
 <div class="page-container">
@@ -195,6 +193,7 @@
                 </div>
             {% endif %}
             <button class="button" type="submit" value="提交">提交</button>
+						<a class="close-btn" href="./logout?phone={{request.GET.urlencode |phone}}">退出</a>
         </form>
     </div>
     <div class="clear"></div>

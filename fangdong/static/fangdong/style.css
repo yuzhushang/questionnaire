@@ -81,6 +81,16 @@ input[type=radio] {
 }
 .page-container .page-right form {
     padding-bottom: 24px;
+    position: relative;
+}
+.page-container .page-right form .close-btn {
+    position: absolute;
+    right: 20px;
+    height: 52px;
+    line-height: 72px;
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
 }
 .page-container .page-right form .question >div {
     padding-top: 2px;

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'fangdong/common.css' %}" />
+	<title>Title</title>
+</head>
+<body>
+<div class="container" style="text-align: center; font-size: 20px; padding-top: 40px; color: #444444;">
+	{% block mark_count %}
+	<p>此次评价到此结束</p>
+	<p>您已成功对<span style="color: red; padding: 0 4px">{{mark_count}}</span>位房东做出评价</p>
+	<p>感谢您的参与！</p>
+	{% endblock %}
+</div>
+</body>
+</html>
