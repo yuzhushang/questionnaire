@@ -169,6 +169,9 @@ input[type=radio] {
     .page-container .page-right .panel {
         display: none;
     }
+    .page-container .question .option {
+        display: block;
+    }
 }
 @media (min-width:1128px) {
     .page-container {
@@ -181,5 +184,12 @@ input[type=radio] {
     .page-container .page-right {
         width: calc(75% - 24px);
         float: right;
+    }
+    .page-container .question .option {
+        display: inline-block;
+        padding-right: 15px;
+    }
+    .page-container .question .percentage-range {
+        padding-right: 0;
     }
 }
