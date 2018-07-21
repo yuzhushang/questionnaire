@@ -75,7 +75,14 @@ def index(request):
         #     num_range.append('{i}'.format(i=i))
         # else:
         #     num_range.append('{i}-{j}'.format(i=i*10+1, j=(i+1)*10))
+    percentage_range = []
+    for i in range(10):
+        if i == 0:
+            percentage_range.append('{i}-{j}'.format(i=i, j=(i+1)*10))
+        else:
+            percentage_range.append('{i}-{j}'.format(i=i*10+1, j=(i+1)*10))
     result_data['num_range'] = num_range
+    result_data['percentage_range'] = percentage_range
     context = {'landlords': result_data}
     return render(request, 'fangdong/index.html', context)
 
