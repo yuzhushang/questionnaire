@@ -57,7 +57,7 @@
 			<div><i>*</i> Review scores rating(评论打分):&nbsp;{{landlords.review_scores_rating}}</div>
 		</div>
 		<form action="/fangdong/visit" method="get">
-			<div class="title">请对该房东的感知可信度进行打分</div>
+			<div class="title">请对该房东的感知可信度进行打分（1-not at all to 7-extremely）</div>
 			<div class="questions border-bottom">
 				<div class="question">
 					<div>This person is capable of paying his/her own rent mortgage.</div>
@@ -189,6 +189,31 @@
 					<div class="option">
 						<input type="radio" name="english_level" value="六级以上">六级以上
 					</div>
+				</div>
+				<div class="question">
+					<div class="mt10">Your disposition to trust(你的轻信度)（1-not at all to 7-extremely）</div>
+					<div class="mt10 mb10">Most people are reliable</div>
+					{% for i in landlords.num_range %}
+					<div class="option">
+						<input type="radio" name="question1_disposition" value="{{i}}" checked="checked">{{i}}
+					</div>
+					{% endfor %}
+				</div>
+				<div class="question">
+					<div class="mt10 mb10">Most people are honest</div>
+					{% for i in landlords.num_range %}
+					<div class="option">
+						<input type="radio" name="question2_disposition" value="{{i}}" checked="checked">{{i}}
+					</div>
+					{% endfor %}
+				</div>
+				<div class="question">
+					<div class="mt10 mb10">Most people are of good faith</div>
+					{% for i in landlords.num_range %}
+					<div class="option">
+						<input type="radio" name="question3_disposition" value="{{i}}" checked="checked">{{i}}
+					</div>
+					{% endfor %}
 				</div>
 			</div>
 			{% endif %}
