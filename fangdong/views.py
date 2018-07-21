@@ -96,7 +96,9 @@ def visit(request):
             visitors.english_level = request.GET.get("english_level")
             visitors.degree = request.GET.get("degree")
             visitors.age = request.GET.get("age")
-            visitors
+            visitors.credulity_question1 = request.GET.get("credulity_question1")
+            visitors.credulity_question2 = request.GET.get("credulity_question2")
+            visitors.credulity_question3 = request.GET.get("credulity_question3")
             visitors.save()
             data = Visitors.objects.filter(phone=phone).first()
 
