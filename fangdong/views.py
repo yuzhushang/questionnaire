@@ -69,11 +69,12 @@ def index(request):
     if result_data['host_verifications']:
         result_data['host_verifications'] = json.loads(result_data['host_verifications'].replace("'", "\""))
     num_range = []
-    for i in range(10):
-        if i == 0:
-            num_range.append('{i}-{j}'.format(i=i, j=(i+1)*10))
-        else:
-            num_range.append('{i}-{j}'.format(i=i*10+1, j=(i+1)*10))
+    for i in range(1, 8):
+        num_range.append(i)
+        # if i == 0:
+        #     num_range.append('{i}'.format(i=i))
+        # else:
+        #     num_range.append('{i}-{j}'.format(i=i*10+1, j=(i+1)*10))
     result_data['num_range'] = num_range
     context = {'landlords': result_data}
     return render(request, 'fangdong/index.html', context)
@@ -95,6 +96,7 @@ def visit(request):
             visitors.english_level = request.GET.get("english_level")
             visitors.degree = request.GET.get("degree")
             visitors.age = request.GET.get("age")
+            visitors
             visitors.save()
             data = Visitors.objects.filter(phone=phone).first()
 

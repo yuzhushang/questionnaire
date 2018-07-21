@@ -32,6 +32,9 @@ class Visitors(models.Model):
     english_level = models.CharField(max_length=10, null=True)
     degree = models.CharField(max_length=10, null=True)
     age = models.CharField(max_length=10, null=True)
+    credulity_question1 = models.IntegerField(null=True)
+    credulity_question2 = models.IntegerField(null=True)
+    credulity_question3 = models.IntegerField(null=True)
     # visitor_Landlord = models.ManyToManyField(Landlord)
 
     class Meta:
