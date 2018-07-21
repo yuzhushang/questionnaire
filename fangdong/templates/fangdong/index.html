@@ -1,202 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% load static %}
-    {% load url_cut %}
-    <link rel="stylesheet" type="text/css" href="{% static 'fangdong/common.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'fangdong/style.css' %}" />
-    <script src="{% static 'fangdong/jquery.js' %}"></script>
-    <title>Title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% load static %}
+	{% load url_cut %}
+	<link rel="stylesheet" type="text/css" href="{% static 'fangdong/common.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'fangdong/style.css' %}" />
+	<script src="{% static 'fangdong/jquery.js' %}"></script>
+	<title>Title</title>
 </head>
 <body>
 {% block landlords %}
 {% if landlords %}
 <div class="page-container">
-    <div class="page-left">
-        <div class="host-img">
-            <img src="{% static 'fangdong/images/' %}{{landlords.listing_id}}-{{landlords.host_id}}.gif">
-        </div>
-        {% if landlords.host_verifications %}
-            <div class="panel">
-                <div class="panel-header">已验证的信息</div>
-                <div class="panel-content">
-                    {% for host_verification in landlords.host_verifications %}
-                        <div class="host-verification-item">
-                            <div class="text">{{host_verification}}</div>
-                            <div class="icon-tick-checked"></div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        {% endif %}
-    </div>
-    <div class="page-right">
-        <div class="host_about">
-            {{landlords.host_about}}
-        </div>
-        {% if landlords.host_verifications %}
-        <div class="panel mb24">
-            <div class="panel-header">已验证的信息</div>
-            <div class="panel-content">
-                {% for host_verification in landlords.host_verifications %}
-                <div class="host-verification-item">
-                    <div class="text">{{host_verification}}</div>
-                    <div class="icon-tick-checked"></div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-        <div class="host-grade border-bottom">
-					<div><i>*</i> Superhost (超级房东):&nbsp;{% if landlords.superhost%}是{% else %}否{% endif %}</div>
-					<div><i>*</i> Response time(回复时间):&nbsp;{{landlords.response_time}}</div>
-					<div><i>*</i> Response rate(回复率):&nbsp;{{landlords.response_rate}}</div>
-					<div><i>*</i> Number of reviews(评论量):&nbsp;{{landlords.number_of_reviews}}</div>
-					<div><i>*</i> Review scores rating(评论打分):&nbsp;{{landlords.review_scores_rating}}</div>
-        </div>
-        <form action="/fangdong/visit" method="get">
-						<div class="title">请对该房东的感知可信度进行打分</div>
-						<div class="questions border-bottom">
-							<div class="question">
-								<div>This person is capable of paying his/her own rent mortgage.</div>
-								<div class="mb10">该房东有能力支付他/她自己的租金。</div>
-								{% for i in landlords.num_range %}
-								<div class="option">
-									<input type="radio" name="question1_score" value="{{i}}" checked="checked">{{i}}
-								</div>
-								{% endfor %}
-							</div>
-							<div class="question">
-								<div class="mt10">This person maintains a clean, safe, and comfortable household.</div>
-								<div class="mb10">该房东会为我提供一个干净，安全，舒适的居住环境。</div>
-								{% for i in landlords.num_range %}
-								<div class="option">
-								<input type="radio" name="question2_score" value="{{i}}" checked="checked">{{i}}
-								</div>
-								{% endfor %}
-							</div>
-							<div class="question">
-								<div class="mt10">This person will be concerned about satisfying my needs during the day.</div>
-								<div class="mb10">在我居住期间，该房东会尽力满足我的需求。</div>
-								{% for i in landlords.num_range %}
-								<div class="option">
-								<input type="radio" name="question3_score" value="{{i}}" checked="checked">{{i}}
-								</div>
-								{% endfor %}
-							</div>
-							<div class="question">
-								<div class="mt10">This person will go out of his/her way to help me in case of an emergency during my stay.</div>
-								<div class="mb10">在我居住期间如果遇到紧急情况，该房东会帮助我。</div>
-								{% for i in landlords.num_range %}
-								<div class="option">
-								<input type="radio" name="question4_score" value="{{i}}" checked="checked">{{i}}
-								</div>
-								{% endfor %}
-							</div>
-							<div class="question">
-								<div class="mt10">This person will stick to his/her word, and be there when I arrive instead of standing me up.</div>
-								<div class="mb10">该房东会信守约定等待我办理入住，不会爽约。</div>
-								{% for i in landlords.num_range %}
-								<div class="option">
-								<input type="radio" name="question5_score" value="{{i}}" checked="checked">{{i}}
-								</div>
-								{% endfor %}
-							</div>
-							<div class="question">
-								<div class="mt10">This person will not intentionally harm, overcharge, or scam me.</div>
-								<div class="mb10">该房东不会蓄意伤害，提高价格或者欺骗我。</div>
-								{% for i in landlords.num_range %}
-								<div class="option">
-								<input type="radio" name="question6_score" value="{{i}}" checked="checked">{{i}}
-								</div>
-								{% endfor %}
-							</div>
-							<div class="question">
-								<div class="mt10 mb10">您是否会选择入住该房东的房源？</div>
-								<div class="option">
-								<input type="radio" name="question7_score" value="是" checked="checked">是
-								</div>
-								<div class="option">
-								<input type="radio" name="question7_score" value="否">否
-								</div>
-							</div>
-							<div class="question">
-								<div class="mt10 mb10">您选择该房东的房源的概率有多大？</div>
-								{% for i in landlords.num_range %}
-								<div class="option">
-								<input type="radio" name="question8_score" value="{{i}}" checked="checked">{{i}}
-								</div>
-								{% endfor %}
-								<input style="display: none" id="phone" type="text" name="phone" placeholder="手机号" value="{{request.GET.urlencode |phone}}">
-								<input style="display: none" id="listing_id" type="text" name="listing_id" value="{{landlords.listing_id}}">
-							</div>
-						</div>
-            {% if not landlords.has_record%}
-								<div class="title">请填写您的个人信息</div>
-                <div class="questions border-bottom">
-                    <div class="question">
-                        <div class="mb10">性别</div>
-											<div class="option">
-                        <input type="radio" name="gender" value="男" checked="checked">男
-											</div>
-											<div class="option">
-                        <input type="radio" name="gender" value="女">女
-											</div>
-                    </div>
-                    <div class="question">
-												<div class="mt10 mb10">年龄</div>
-											<div class="option">
-                        <input type="radio" name="age" value="18以下">18以下
-											</div>
-											<div class="option">
-                        <input type="radio" name="age" value="18-29" checked="checked">18-29
-											</div>
-											<div class="option">
-                        <input type="radio" name="age" value="30-45">30-45
-											</div>
-											<div class="option">
-                        <input type="radio" name="age" value="46以上">46以上
-											</div>
-                    </div>
-                    <div class="question">
-												<div class="mt10 mb10">学历</div>
-											<div class="option">
-                        <input type="radio" name="degree" value="本科以下">本科以下
-											</div>
-											<div class="option">
-                        <input type="radio" name="degree" value="本科" checked="checked">本科
-											</div>
-											<div class="option">
-                        <input type="radio" name="degree" value="硕士">硕士
-											</div>
-											<div class="option">
-                        <input type="radio" name="degree" value="博士及以上">博士及以上
-											</div>
-                    </div>
-                    <div class="question">
-												<div class="mt10 mb10">英文水平</div>
-											<div class="option">
-                        <input type="radio" name="english_level" value="四级以下">四级以下
-											</div>
-											<div class="option">
-                        <input type="radio" name="english_level" value="四级" checked="checked">四级
-											</div>
-											<div class="option">
-                        <input type="radio" name="english_level" value="六级">六级
-											</div>
-											<div class="option">
-                        <input type="radio" name="english_level" value="六级以上">六级以上
-											</div>
-                    </div>
-                </div>
-            {% endif %}
-            <button class="button" type="submit" value="提交">提交</button>
-						<a class="close-btn" href="./logout?phone={{request.GET.urlencode |phone}}">退出</a>
-        </form>
-    </div>
-    <div class="clear"></div>
+	<div class="page-left">
+		<div class="host-img">
+			<img src="{% static 'fangdong/images/' %}{{landlords.listing_id}}-{{landlords.host_id}}.gif">
+		</div>
+		{% if landlords.host_verifications %}
+		<div class="panel">
+			<div class="panel-header">已验证的信息</div>
+			<div class="panel-content">
+				{% for host_verification in landlords.host_verifications %}
+				<div class="host-verification-item">
+					<div class="text">{{host_verification}}</div>
+					<div class="icon-tick-checked"></div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% endif %}
+	</div>
+	<div class="page-right">
+		<div class="host_about">
+			{{landlords.host_about}}
+		</div>
+		{% if landlords.host_verifications %}
+		<div class="panel mb24">
+			<div class="panel-header">已验证的信息</div>
+			<div class="panel-content">
+				{% for host_verification in landlords.host_verifications %}
+				<div class="host-verification-item">
+					<div class="text">{{host_verification}}</div>
+					<div class="icon-tick-checked"></div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% endif %}
+		<div class="host-grade border-bottom">
+			<div><i>*</i> Superhost (超级房东):&nbsp;{% if landlords.superhost%}是{% else %}否{% endif %}</div>
+			<div><i>*</i> Response time(回复时间):&nbsp;{{landlords.response_time}}</div>
+			<div><i>*</i> Response rate(回复率):&nbsp;{{landlords.response_rate}}</div>
+			<div><i>*</i> Number of reviews(评论量):&nbsp;{{landlords.number_of_reviews}}</div>
+			<div><i>*</i> Review scores rating(评论打分):&nbsp;{{landlords.review_scores_rating}}</div>
+		</div>
+		<form action="/fangdong/visit" method="get">
+			<div class="title">请对该房东的感知可信度进行打分</div>
+			<div class="questions border-bottom">
+				<div class="question">
+					<div>This person is capable of paying his/her own rent mortgage.</div>
+					<div class="mb10">该房东有能力支付他/她自己的租金。</div>
+					{% for i in landlords.num_range %}
+					<div class="option">
+						<input type="radio" name="question1_score" value="{{i}}" checked="checked">{{i}}
+					</div>
+					{% endfor %}
+				</div>
+				<div class="question">
+					<div class="mt10">This person maintains a clean, safe, and comfortable household.</div>
+					<div class="mb10">该房东会为我提供一个干净，安全，舒适的居住环境。</div>
+					{% for i in landlords.num_range %}
+					<div class="option">
+						<input type="radio" name="question2_score" value="{{i}}" checked="checked">{{i}}
+					</div>
+					{% endfor %}
+				</div>
+				<div class="question">
+					<div class="mt10">This person will be concerned about satisfying my needs during the day.</div>
+					<div class="mb10">在我居住期间，该房东会尽力满足我的需求。</div>
+					{% for i in landlords.num_range %}
+					<div class="option">
+						<input type="radio" name="question3_score" value="{{i}}" checked="checked">{{i}}
+					</div>
+					{% endfor %}
+				</div>
+				<div class="question">
+					<div class="mt10">This person will go out of his/her way to help me in case of an emergency during my stay.</div>
+					<div class="mb10">在我居住期间如果遇到紧急情况，该房东会帮助我。</div>
+					{% for i in landlords.num_range %}
+					<div class="option">
+						<input type="radio" name="question4_score" value="{{i}}" checked="checked">{{i}}
+					</div>
+					{% endfor %}
+				</div>
+				<div class="question">
+					<div class="mt10">This person will stick to his/her word, and be there when I arrive instead of standing me up.</div>
+					<div class="mb10">该房东会信守约定等待我办理入住，不会爽约。</div>
+					{% for i in landlords.num_range %}
+					<div class="option">
+						<input type="radio" name="question5_score" value="{{i}}" checked="checked">{{i}}
+					</div>
+					{% endfor %}
+				</div>
+				<div class="question">
+					<div class="mt10">This person will not intentionally harm, overcharge, or scam me.</div>
+					<div class="mb10">该房东不会蓄意伤害，提高价格或者欺骗我。</div>
+					{% for i in landlords.num_range %}
+					<div class="option">
+						<input type="radio" name="question6_score" value="{{i}}" checked="checked">{{i}}
+					</div>
+					{% endfor %}
+				</div>
+				<div class="question">
+					<div class="mt10 mb10">您是否会选择入住该房东的房源？</div>
+					<div class="option">
+						<input type="radio" name="question7_score" value="是" checked="checked">是
+					</div>
+					<div class="option">
+						<input type="radio" name="question7_score" value="否">否
+					</div>
+				</div>
+				<div class="question">
+					<div class="mt10 mb10">您选择该房东的房源的概率有多大？</div>
+					{% for i in landlords.num_range %}
+					<div class="option">
+						<input type="radio" name="question8_score" value="{{i}}" checked="checked">{{i}}
+					</div>
+					{% endfor %}
+					<input style="display: none" id="phone" type="text" name="phone" placeholder="手机号" value="{{request.GET.urlencode |phone}}">
+					<input style="display: none" id="listing_id" type="text" name="listing_id" value="{{landlords.listing_id}}">
+				</div>
+			</div>
+			{% if not landlords.has_record%}
+			<div class="title">请填写您的个人信息</div>
+			<div class="questions border-bottom">
+				<div class="question">
+					<div class="mb10">性别</div>
+					<div class="option">
+						<input type="radio" name="gender" value="男" checked="checked">男
+					</div>
+					<div class="option">
+						<input type="radio" name="gender" value="女">女
+					</div>
+				</div>
+				<div class="question">
+					<div class="mt10 mb10">年龄</div>
+					<div class="option">
+						<input type="radio" name="age" value="18以下">18以下
+					</div>
+					<div class="option">
+						<input type="radio" name="age" value="18-29" checked="checked">18-29
+					</div>
+					<div class="option">
+						<input type="radio" name="age" value="30-45">30-45
+					</div>
+					<div class="option">
+						<input type="radio" name="age" value="46以上">46以上
+					</div>
+				</div>
+				<div class="question">
+					<div class="mt10 mb10">学历</div>
+					<div class="option">
+						<input type="radio" name="degree" value="本科以下">本科以下
+					</div>
+					<div class="option">
+						<input type="radio" name="degree" value="本科" checked="checked">本科
+					</div>
+					<div class="option">
+						<input type="radio" name="degree" value="硕士">硕士
+					</div>
+					<div class="option">
+						<input type="radio" name="degree" value="博士及以上">博士及以上
+					</div>
+				</div>
+				<div class="question">
+					<div class="mt10 mb10">英文水平</div>
+					<div class="option">
+						<input type="radio" name="english_level" value="四级以下">四级以下
+					</div>
+					<div class="option">
+						<input type="radio" name="english_level" value="四级" checked="checked">四级
+					</div>
+					<div class="option">
+						<input type="radio" name="english_level" value="六级">六级
+					</div>
+					<div class="option">
+						<input type="radio" name="english_level" value="六级以上">六级以上
+					</div>
+				</div>
+			</div>
+			{% endif %}
+			<button class="button" type="submit" value="提交">提交</button>
+			<a class="close-btn" href="./logout?phone={{request.GET.urlencode |phone}}">退出</a>
+		</form>
+	</div>
+	<div class="clear"></div>
 </div>
 {% else %}
 <div class="page-container" style="text-align: center; padding-top: 40px;">
