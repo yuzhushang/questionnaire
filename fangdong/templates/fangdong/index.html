@@ -9,6 +9,22 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'fangdong/style.css' %}" />
 	<script src="{% static 'fangdong/jquery.js' %}"></script>
 	<title>Title</title>
+	<script type="text/javascript">
+    function check() {
+      var params = $("form").serialize().split('&');
+      var len = 8;
+      params = params.filter(function (item) {
+        return !/phone/.test(item) && !/listing_id/.test(item);
+      });
+      if ($("form .questions").length > 1) {
+        len = 15;
+      }
+      if (params.length !== len) {
+        alert("请答完所有问题后再提交！");
+      }
+      return params.length === len;
+    }
+	</script>
 </head>
 <body>
 {% block landlords %}
@@ -56,7 +72,7 @@
 			<div><i>*</i> Number of reviews(评论量):&nbsp;{{landlords.number_of_reviews}}</div>
 			<div><i>*</i> Review scores rating(评论打分):&nbsp;{{landlords.review_scores_rating}}</div>
 		</div>
-		<form action="/fangdong/visit" method="get">
+		<form action="/fangdong/visit" method="get" onsubmit="return check();">
 			<div class="title">请对该房东的感知可信度进行打分（1-not at all to 7-extremely）</div>
 			<div class="questions border-bottom">
 				<div class="question">
@@ -64,7 +80,7 @@
 					<div class="mb10">该房东有能力支付他/她自己的租金。</div>
 					{% for i in landlords.num_range %}
 					<div class="option">
-						<input type="radio" name="question1_score" value="{{i}}" checked="checked">{{i}}
+						<input type="radio" name="question1_score" value="{{i}}">{{i}}
 					</div>
 					{% endfor %}
 				</div>
@@ -73,7 +89,7 @@
 					<div class="mb10">该房东会为我提供一个干净，安全，舒适的居住环境。</div>
 					{% for i in landlords.num_range %}
 					<div class="option">
-						<input type="radio" name="question2_score" value="{{i}}" checked="checked">{{i}}
+						<input type="radio" name="question2_score" value="{{i}}">{{i}}
 					</div>
 					{% endfor %}
 				</div>
@@ -82,7 +98,7 @@
 					<div class="mb10">在我居住期间，该房东会尽力满足我的需求。</div>
 					{% for i in landlords.num_range %}
 					<div class="option">
-						<input type="radio" name="question3_score" value="{{i}}" checked="checked">{{i}}
+						<input type="radio" name="question3_score" value="{{i}}">{{i}}
 					</div>
 					{% endfor %}
 				</div>
@@ -91,7 +107,7 @@
 					<div class="mb10">在我居住期间如果遇到紧急情况，该房东会帮助我。</div>
 					{% for i in landlords.num_range %}
 					<div class="option">
-						<input type="radio" name="question4_score" value="{{i}}" checked="checked">{{i}}
+						<input type="radio" name="question4_score" value="{{i}}">{{i}}
 					</div>
 					{% endfor %}
 				</div>
@@ -100,7 +116,7 @@
 					<div class="mb10">该房东会信守约定等待我办理入住，不会爽约。</div>
 					{% for i in landlords.num_range %}
 					<div class="option">
-						<input type="radio" name="question5_score" value="{{i}}" checked="checked">{{i}}
+						<input type="radio" name="question5_score" value="{{i}}">{{i}}
 					</div>
 					{% endfor %}
 				</div>
@@ -109,14 +125,14 @@
 					<div class="mb10">该房东不会蓄意伤害，提高价格或者欺骗我。</div>
 					{% for i in landlords.num_range %}
 					<div class="option">
-						<input type="radio" name="question6_score" value="{{i}}" checked="checked">{{i}}
+						<input type="radio" name="question6_score" value="{{i}}">{{i}}
 					</div>
 					{% endfor %}
 				</div>
 				<div class="question">
 					<div class="mt10 mb10">您是否会选择入住该房东的房源？</div>
 					<div class="option">
-						<input type="radio" name="question7_score" value="是" checked="checked">是
+						<input type="radio" name="question7_score" value="是">是
 					</div>
 					<div class="option">
 						<input type="radio" name="question7_score" value="否">否
@@ -124,9 +140,9 @@
 				</div>
 				<div class="question">
 					<div class="mt10 mb10">您选择该房东的房源的概率有多大？</div>
-					{% for i in landlords.percentage_range %}
+					{% for i in landlords.num_range %}
 					<div class="option percentage-range">
-						<input type="radio" name="question8_score" value="{{i}}" checked="checked">{{i}}
+						<input type="radio" name="question8_score" value="{{i}}">{{i}}
 					</div>
 					{% endfor %}
 					<input style="display: none" id="phone" type="text" name="phone" placeholder="手机号" value="{{request.GET.urlencode |phone}}">
@@ -139,7 +155,7 @@
 				<div class="question">
 					<div class="mb10">性别</div>
 					<div class="option">
-						<input type="radio" name="gender" value="男" checked="checked">男
+						<input type="radio" name="gender" value="男">男
 					</div>
 					<div class="option">
 						<input type="radio" name="gender" value="女">女
@@ -151,7 +167,7 @@
 						<input type="radio" name="age" value="18以下">18以下
 					</div>
 					<div class="option">
-						<input type="radio" name="age" value="18-29" checked="checked">18-29
+						<input type="radio" name="age" value="18-29">18-29
 					</div>
 					<div class="option">
 						<input type="radio" name="age" value="30-45">30-45
@@ -166,7 +182,7 @@
 						<input type="radio" name="degree" value="本科以下">本科以下
 					</div>
 					<div class="option">
-						<input type="radio" name="degree" value="本科" checked="checked">本科
+						<input type="radio" name="degree" value="本科">本科
 					</div>
 					<div class="option">
 						<input type="radio" name="degree" value="硕士">硕士
@@ -181,7 +197,7 @@
 						<input type="radio" name="english_level" value="四级以下">四级以下
 					</div>
 					<div class="option">
-						<input type="radio" name="english_level" value="四级" checked="checked">四级
+						<input type="radio" name="english_level" value="四级">四级
 					</div>
 					<div class="option">
 						<input type="radio" name="english_level" value="六级">六级
@@ -195,7 +211,7 @@
 					<div class="mt10 mb10">Most people are reliable</div>
 					{% for i in landlords.num_range %}
 					<div class="option">
-						<input type="radio" name="credulity_question1" value="{{i}}" checked="checked">{{i}}
+						<input type="radio" name="credulity_question1" value="{{i}}">{{i}}
 					</div>
 					{% endfor %}
 				</div>
@@ -203,7 +219,7 @@
 					<div class="mt10 mb10">Most people are honest</div>
 					{% for i in landlords.num_range %}
 					<div class="option">
-						<input type="radio" name="credulity_question2" value="{{i}}" checked="checked">{{i}}
+						<input type="radio" name="credulity_question2" value="{{i}}">{{i}}
 					</div>
 					{% endfor %}
 				</div>
@@ -211,7 +227,7 @@
 					<div class="mt10 mb10">Most people are of good faith</div>
 					{% for i in landlords.num_range %}
 					<div class="option">
-						<input type="radio" name="credulity_question3" value="{{i}}" checked="checked">{{i}}
+						<input type="radio" name="credulity_question3" value="{{i}}">{{i}}
 					</div>
 					{% endfor %}
 				</div>
