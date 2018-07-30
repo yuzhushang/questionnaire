@@ -164,7 +164,7 @@ def visit(request):
 def logout(request):
     phone = request.GET.get("phone")
     cur = connection.cursor()
-    cur.execute("SELECT count(1) as ev FROM visitor_landlord_relation vl JOIN visitors v ON v.visitor_id=vl.visitor_id WHERE v.phone =%s", (phone,))
+    cur.execute("SELECT count(distinct landlord_id) as ev FROM visitor_landlord_relation vl JOIN visitors v ON v.visitor_id=vl.visitor_id WHERE v.phone =%s", (phone,))
     mark_count = cur.fetchone()[0]
     context = {'mark_count': mark_count}
     return render(request, 'fangdong/logout.html', context)
